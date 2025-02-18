@@ -16,6 +16,9 @@ from email import encoders
 #===============================constantes==============================================
 
 
+# Récupérer les credentials depuis GitHub Secrets
+email_sender = os.environ.get("EMAIL_SENDER")
+email_password = os.environ.get("EMAIL_PASSWORD")
 liste_url = ["https://www.amazon.fr/Google-Pixel-Smartphone-dautonomie-Volcanique/dp/B0D7TYVYRY/ref=sr_1_5?crid=11Y36HE2OHNO5&dib=eyJ2IjoiMSJ9.EGkr3YvIIGj-Wz0pal0bSLq8LxPn5wezt6PUdxEXcpoTvGi8Q9qsSqlvDlenckIuWs1Wp_iYzkFLX0TxIvqozN1uG50MWkeLoF88miF9HvVSZF-NeDMsbfDpOOit7Zux9qs2NUXEUEj18uDjHBBYIY_kUE-eQWW6nO1AKf0w-V2ngoRJO8U2smzu7t95Sk5SAf_XYd1-m0ZRvlLcwMtLAWuHe1yaiMYrg5V31SBvdGcl6Z2tpF0VzYRjdpQc2sCboh9Rn_ySLyWAA5QGiyU6zTreoNj6Y70Zy4fQAZ_rOSGIV3A21M1BZ8oKe7uLnZyysRgP1VvKQaIC0hteMpjSUDy67UPVeecJGkeCpJF1gZk.w0MfATPSWmYJ3mFJfxt6G07CvMOU-p7fr_KiicEsBTM&dib_tag=se&keywords=google%2Bpixel&qid=1739734394&s=electronics&sprefix=goo%2Celectronics%2C982&sr=1-5&th=1",
              "https://www.amazon.fr/Apple-iPhone-Pro-Max-256/dp/B0DGHR9VG2/ref=sr_1_3_sspa?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=3EHDD6E64DYDB&dib=eyJ2IjoiMSJ9.4NDNEv4NrQYOOnbgtXOZ7k3NKd95Efk2L6w64SQLI2vxoIRk_kqLA01vPN24qm0HwQ_09XbwPTs7_MdIYyaL30gF--40Pj7VFAjlP1VN2Cv_SG3kWCgtDFeQE7QSAjl0v39xGi2txM84Vb_kTP36BwjMoiIPuhdMGys1HLPrztcorX4s-BOeZ5BwRBLOcovFNWy_JFACoqksLtXHzZrqJ7jqy0mctKr0GeyU2xlkED1ePbRRg0Q7Dq7_ztRiibs3Hfx_cd1m9wRLJv955JhLzQGnpwpNhNHWQcOhDFAZvzg.DrCwO4wkq6qQ3vGNF7A6KsGEQvRZK2jaKtE1lfusJvY&dib_tag=se&keywords=Apple&qid=1739733779&s=electronics&sprefix=apple%2Celectronics%2C912&sr=1-3-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
              "https://www.amazon.fr/gp/aw/d/B0DNZKMV8J/?_encoding=UTF8&pd_rd_plhdr=t&aaxitk=8d75d5ae80bd9387f4f135f737a4cf47&hsa_cr_id=0&qid=1739731849&sr=1-1-e0fa1fdd-d857-4087-adda-5bd576b25987&ref_=sbx_be_s_sparkle_lsi4d_asin_0_title&pd_rd_w=FB76K&content-id=amzn1.sym.fcb06097-6196-4e78-932c-0f6f89d56105%3Aamzn1.sym.fcb06097-6196-4e78-932c-0f6f89d56105&pf_rd_p=fcb06097-6196-4e78-932c-0f6f89d56105&pf_rd_r=HP77Y46K2ZAYZR56YPYX&pd_rd_wg=PvpQz&pd_rd_r=40bcef69-c83f-48d5-9a59-b5cb96b0ad29&th=1",
@@ -189,8 +192,8 @@ def compare_and_append_dataframes(df, df1):
 
 
 def send_email_with_csv(changes, receiver_email="nostatsum@gmail.com", csv_file_path='amazon_products.csv'):
-    sender_email = "nostatsum@gmail.com"#"projetwebscrapping@gmail.com"  # Replace with your email
-    sender_password = "pqlp qqtr epvf chkj"  # Replace with your email password (or app password)
+    sender_email = email_sender#"nostatsum@gmail.com"#"projetwebscrapping@gmail.com"  # Replace with your email
+    sender_password = email_password#"pqlp qqtr epvf chkj"  # Replace with your email password (or app password)
 
     msg = MIMEMultipart()
     msg["Subject"] = "Amazon Price Tracker: Changes Detected"
