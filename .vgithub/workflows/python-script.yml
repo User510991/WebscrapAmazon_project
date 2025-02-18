@@ -1,0 +1,38 @@
+name: Exécution automatique du script Python
+
+on:
+  schedule:
+    - cron: '0 8 * * *'  # Exécute tous les jours à 08:00 UTC
+  workflow_dispatch:    # Permet un déclenchement manuel
+
+jobs:
+  run-python-script:
+    runs-on: ubuntu-latest  # Machine virtuelle Ubuntu
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v3
+
+      - name: Installer Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Installer les dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || echo "Aucune dépendance à installer"
+
+
+      - name: Exécuter le script avec email
+        env:
+          EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        run: python script.py
+
+      - name: Valider et pousser les modifications
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions@github.com"
+          git add amazon_products.csv
+          git commit -m "🔄 Mise à jour automatique du fichier CSV"
+          git push
