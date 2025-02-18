@@ -29,10 +29,18 @@ jobs:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: python script.py
 
-      - name: Valider et pousser les modifications
+
+      - name: Configurer authentification Git
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git
+
+
+      - name: Valider et pousser les modifications
+        run: |
           git add amazon_products.csv
           git commit -m "🔄 Mise à jour automatique du fichier CSV"
           git push
