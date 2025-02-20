@@ -12,6 +12,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+import time
+import random
 
 #===============================constantes==============================================
 
@@ -26,23 +28,50 @@ liste_url = ["https://www.amazon.fr/Google-Pixel-Smartphone-dautonomie-Volcaniqu
              #"https://www.amazon.fr/Google-Pixel-Smartphone-d%C3%A9bloqu%C3%A9-renouvel%C3%A9/dp/B09LR34Z3C/ref=sr_1_3?crid=DG79WXUHCJKA&dib=eyJ2IjoiMSJ9.EGkr3YvIIGj-Wz0pal0bSLq8LxPn5wezt6PUdxEXcpoTvGi8Q9qsSqlvDlenckIuWs1Wp_iYzkFLX0TxIvqozN1uG50MWkeLoF88miF9HvVSZF-NeDMsbfDpOOit7Zux9qs2NUXEUEj18uDjHBBYIY_kUE-eQWW6nO1AKf0w-V2ngoRJO8U2smzu7t95Sk5SAf_XYd1-m0ZRvlLcwMtLAWuHe1yaiMYrg5V31SBvdGcl6Z2tpF0VzYRjdpQc2sCboh9Rn_ySLyWAA5QGiyU6zVDD2J30l0Nl2__JhYLlzpg.-doq8M-d1DVlZgyc3ZOxX0hXBE6B1XChPWU7kYaE77Q&dib_tag=se&keywords=google+pixel&qid=1739734657&s=electronics&sprefix=google+pixel%2Celectronics%2C1978&sr=1-3",
              "https://www.amazon.fr/HUAWEI-fonctionnalit%C3%A9s-Ultra-Rapide-T%C3%A9l%C3%A9objectif-Supercharge/dp/B0CZ3J1PT7/ref=sr_1_1_sspa?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dib=eyJ2IjoiMSJ9.FHr3Uoscg38h0ur1yC6BuYYFOLSjjK294UxW6jkY10yZvQA0eBW3g_hwS9oJG07MxkEqwHcb-FgbAP1b8YmZuK8p8gTpUvP-kbnk0U_pAGj3xjaS3P1hu0p8T6NwKjQC8mgQws0S6CrHoBzOAnAJAurpsNRBIcTQ0Hk-Iet2CM_p1XhD-14aVBDSezE8uifnddLqEV08TgDd5-mF86MHyInAmBwtacnD6m146HH4M62xIru8WPERMQsMgpK3sOTETu2hrkVjfxkTIT3hBmeSDxTNKwPm4SeG2l1aObKiKfQ.Uhw8QS2BROjGbtYFQ6yKRVE8TQTuvl57qZRv48nI7OY&dib_tag=se&keywords=Huawei&qid=1739753355&s=electronics&sr=1-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
              "https://www.amazon.fr/Xiaomi-T%C3%A9l%C3%A9phone-portable-Processeur-batterie/dp/B0DNYYJWQV/ref=sr_1_2_sspa?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dib=eyJ2IjoiMSJ9.oyc8gOIkMnC8VPQlc4sIERH_gDdgJ5MXJ9fpk1T_CFZc26TqRi0dhfuL2LgMsspF5jRBRCp0UJrLgcy_ANO7kpOUdRADLHWbQVN7-tVTJgv0kEdzLNO3ENxKRLOePAtOkVWbsUeBdAuGJLI68zRW2qNCXL1yb35gRb4aJgQ4oAjOejWWAeAePxrV4kNQSZb8iRQBaVsTqHfUEushlE033D38XsHizVKw8uwlaJU8bsNhSID9SFm28KoLyNQaHWRlqv18zI1HG4C7cZgofT6OX7pVXEPBUNbtVBpbtZ5NUUc.rIQamMAQOYbAbXVJuWzJkegntLzTKd11wLzVXRLKwN0&dib_tag=se&keywords=Xiaomi%2BRedmi&qid=1739755204&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1"]
-
-
-
+urls = [
+    "https://amzn.eu/d/3W1VTVE",
+    "https://amzn.eu/d/bdZCvp9",
+    "https://amzn.eu/d/03m7jum",
+    "https://amzn.eu/d/8rMD4kP",
+    "https://amzn.eu/d/1NCHUS0",
+    "https://amzn.eu/d/gighABR",
+    "https://amzn.eu/d/hMP9En1",
+    "https://amzn.eu/d/cLsR3ky",
+    "https://amzn.eu/d/5TVmVl7",
+    "https://amzn.eu/d/0lQlgyI"
+]
+liste_url=liste_url+urls
 #============================Fonctions==================================================
+
 
 # Fonction pour scraper Amazon
 def scrape_amazon(url):
     headers = {
         "User-Agent": random.choice([
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-        ])
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
+    "Mozilla/5.0 (iPad; CPU OS 16_6 like Mac OS X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Mobile Safari/537.36",
+    "Mozilla/5.0 (Android 13; Mobile; rv:110.0) Gecko/110.0 Firefox/110.0",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:115.0) Gecko/20100101 Firefox/115.0",
+    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; Trident/7.0; rv:11.0) like Gecko",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Linux; Android 12; SM-G998B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 15_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6 Mobile/15E148 Safari/604.1",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36",
+    "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_3_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36"
+])
     }
-
-    response = requests.get(url, headers=headers)
-
+    while True:
+      response = requests.get(url, headers=headers)
+      if "captcha" in response.text.lower():
+          print("CAPTCHA détecté, change de stratégie !")
+          time.sleep(random.uniform(3, 5))  # Pause entre 3 et 7 secondes
+      else:
+          break
     if response.status_code != 200:
         return f"Erreur {response.status_code}: Impossible d'accéder à la page"
 
@@ -86,11 +115,15 @@ def scrape_amazon(url):
     }
 
 
-def scrape_liste_url(liste_urls,list_base=liste_url):
+
+
+def scrape_liste_url(liste_urls,list_base=liste_url,retry=0):
   liste_resultats=[]
   retry_list=[]
+  rtr=retry+1
   t=0
   for i in tqdm(liste_urls):
+      time.sleep(random.uniform(3, 7))  # Pause entre 3 et 7 secondes
       a=scrape_amazon(i)
       try:
         if a["Titre"]=="Titre non trouvé":
@@ -99,7 +132,8 @@ def scrape_liste_url(liste_urls,list_base=liste_url):
             a["Numero_Item"]=list_base.index(i)
             liste_resultats.append(a)
       except Exception as e:
-        #retry_list.append(i)
+        if retry<4:
+          retry_list.append(i)
         print(e)
         continue
         #retry_list.append(i)
@@ -107,7 +141,7 @@ def scrape_liste_url(liste_urls,list_base=liste_url):
   #print(retry_list)
   if len(retry_list)==0:
     return liste_resultats
-  return liste_resultats+scrape_liste_url(retry_list)
+  return liste_resultats+scrape_liste_url(retry_list,retry=rtr)
 
 
 def clean_evaluation(df):
