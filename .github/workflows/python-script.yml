@@ -2,7 +2,7 @@ name: Exécution automatique du script Python
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Exécute tous les jours à 08:00 UTC
+    - cron: '0 */12 * * *'  # Exécute tous les 12heures 
   workflow_dispatch:    # Permet un déclenchement manuel
 
 jobs:
