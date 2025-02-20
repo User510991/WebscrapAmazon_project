@@ -284,7 +284,7 @@ else:
 DF2,letter=compare_and_append_dataframes(df, df1)
 DF2
 
-list_receiver_mail=["rdometi205@gmail.com"]
+list_receiver_mail=["rdometi205@gmail.com","fortunempolah@gmail.com"]
 if letter:  # Check if there are changes
     letter=letter + "\n new_base attached"
     DF2.to_csv('amazon_products.csv', index=False) # Save the updated dataframe
