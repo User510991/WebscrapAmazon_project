@@ -287,7 +287,7 @@ DF2
 list_receiver_mail=["rdometi205@gmail.com","fortunempolah@gmail.com"]
 if letter:  # Check if there are changes
     letter=letter + "\n new_base attached"
-    DF2.to_csv('amazon_products.csv', index=False) # Save the updated dataframe
+    DF2.to_csv('amazon_products.csv', index=False,quoting=2) # Save the updated dataframe
     for i in list_receiver_mail:
         send_email_with_csv(letter,receiver_email=i)
     #send_email_with_csv(letter)
