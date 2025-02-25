@@ -268,7 +268,7 @@ p=scrape_liste_url(liste_url)
 df = pd.DataFrame(p)
 
 # Add a 'Date' column with today's date
-df['Date'] = datetime.now().strftime('%Y-%m-%d')
+df['Date'] = datetime.now().strftime('%Y-%m-%d , %H')
 df=clean_df(df)
 #df
 
